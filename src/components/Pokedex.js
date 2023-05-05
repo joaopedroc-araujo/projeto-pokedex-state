@@ -5,16 +5,32 @@ import Pokemon from './Pokemon';
 import { pokemonType } from '../types';
 
 class Pokedex extends React.Component {
+  state = {
+    pokemonIndex: 0,
+  };
+
+  handleNextPokemon = () => {
+    const { pokemonIndex } = this.state;
+    const { pokemonList } = this.props;
+    if (pokemonIndex === pokemonList.length - 1) {
+      this.setState({ pokemonIndex: 0 });
+    } else {
+      this.setState({ pokemonIndex: pokemonIndex + 1 });
+    }
+  };
+
   render() {
     const { pokemonList } = this.props;
-    const firstPokemon = pokemonList[0];
+    const { pokemonIndex } = this.state;
+    const currentPokemon = pokemonList[pokemonIndex];
 
     return (
       <>
         <h1> Pokédex </h1>
         <div className="pokedex">
-          <Pokemon key={ firstPokemon.id } pokemon={ firstPokemon } />
+          <Pokemon key={ currentPokemon.id } pokemon={ currentPokemon } />
         </div>
+        <button type="button" onClick={ this.handleNextPokemon }>Próximo pokémon</button>
       </>
     );
   }
