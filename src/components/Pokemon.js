@@ -19,7 +19,7 @@ class Pokemon extends React.Component {
             </span>
           </p>
         </div>
-        <img src={image} alt={`${name}`} />
+        <img src={ image } alt={ `${name}` } />
       </div>
     );
   }
